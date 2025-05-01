@@ -1,0 +1,1521 @@
+-------------------------DRL(DATA RETRIVAL LANGUAGE) & DQL(DATA QUERY LANGUAGE)---------------------------
+
+
+select * from user_tables;
+
+select * from regions;
+
+select * from countries;
+
+select * from locations;
+
+select * from departments;
+
+select * from jobs;
+
+select * from employees;
+
+select * from job_history;
+ 
+SELECT * FROM WORLD_OF_FILM;
+
+SELECT * FROM PROGRESS;
+
+SELECT * FROM OUT_OF_100;
+
+SELECT * FROM I_SCHOOL;
+
+SELECT * FROM MAD;
+
+select employee_id,first_name,last_name,salary from employees;
+
+select employee_id,first_name,salary,(salary*30)/15 from employees; -- we can able to do arithmetic operations of BODMAS with data's in the column.
+
+select * from dual;
+
+select 2+2+2+2+2 from dual;
+  
+select 25*10-(50/5)from Dual;
+
+select 'VBS' from dual;
+
+select 2000+500-500/20 as "Instant_Result" from dual;
+
+select 'x*y+10' from dual; -- It's used for a Intstant result.
+
+select first_name,last_name,salary,salary+1000 as Bonus from employees;   -- 'as' is used as Alias class.
+
+select vb.first_name,vb.salary,vb.* from employees vb;     -- Here we arrange column name as we want and rest of the columns in ordered.
+
+select rownum,rowid,sysdate,systimestamp,a.* from employees a; -- Here we view the default columns and rest of our created columns in ordered in a sub name.
+
+
+--select first_name||' '||last_name from employees; -- single line comment.       
+
+/*
+select 
+* 
+from 
+employees;   */               -- /*------*/ -- is multi line comment.
+
+
+
+select first_name|| ' '||last_name as name,job_id,salary,salary/5 as bonus from employees;   -- || is a pipeline operator
+
+
+DROP TABLE MY_STU_DETAILS;
+
+select first_name|| ' '||last_name||q'['s DETAILS is]',salary,salary/5 as bonus from employees; -- q' is a delimiter keyword.
+
+desc regions;                -- desc or describe is used to known for what's the datatype of our table and column.
+
+desc countries;
+
+desc locations;
+
+desc departments;
+
+desc jobs;
+
+desc employees;                         
+
+desc job_history;
+
+select * from employees where first_name ='Alexander';           -- where is the class used to find a exact value from colum of tables.
+
+select * from employees where department_id >100;          --we use comparison operators like (=,<>,>,<,>=,<=) to find a range values of column from tables.
+
+select phone_number,first_name,job_id,salary from employees where salary>15000;
+
+select * from employees where first_name in ('Steven','William','Gerald','David');  -- "in" is the class used to find two or more exact values of column from tables.
+
+select * from employees where first_name not in ('Steven','William');      -- "not in" is the class used to find two or more except values of column from tables.
+
+select * from employees where salary between 13000 and 17000;          -- "between" is the class used to find the between values of mentioned ones from column.
+
+select * from employees where salary not between 1000 and 13500;     -- "not between" is the class to find except between values of mentioned ones from column.
+
+select * from employees where first_name like 'D_%d';   -- "%" and "_" is the class used to find a values of non-confirmation words with doubted ones, is called Like Operator.
+                                                        -- "%" is mean to "Anything has come before or after by this symbol" and
+select * from employees where first_name like 'A__s%';  -- "_" is mean to "Only one Position has whatever it comes in this place.
+                                                                
+select * from employees where job_id like 'FI__%' escape '_';  /*is the class used for various characters in a column to find the 
+                                                                  special character contained value by using the Escape operator*/
+
+select * from employees where first_name not like 'P%';  -- 'NOT LIKE' IS USED TO FIND THE VALUES ARE NOT CONTAINING A MENTIONING CONDITION IN SINGLE QUOTES.
+
+select * from employees where commission_pct is null;     --"is" Keyword used for Null Operator. Null indicates the column contains a Null.
+
+select * from employees where commission_pct is not null;     -- Not Null indiactes the column that not contains Null in table.
+
+/* LOGICAL OPERATORS*/
+             /*--> Logical operators ( 'AND','OR','NOT'). Lots of conditions can be using by Logical operators 
+             with added of Null, Comparison,Arithmetic operations of Restriction in single line query. */
+             
+ 
+             
+select * from employees where salary = 2500 and first_name like '_%r';    -- "AND" is the logical operator that should be satisfies each and every condition in query.
+
+select * from employees where first_name in ('Alexander','David')or salary = 5000;    -- "OR" is the logical operator that should be satisfies anyone of the condition in query.
+
+select * from employees where (first_name like 'Jo_%' or job_id in('ST CLERK','SA MAN')) and DEPARTMENT_ID between 50 and 90; --Lots of conditions can be using by Logical operators with Datatypes,comparison,Null.
+
+----------------------------------SORTING-----------------------------------------
+
+select * from employees order by first_name asc;    -- Sorting the column using Ascending. In this case, we just give "order by column name" is also applicable.
+
+select * from  employees order by salary desc;      -- Sorting the colum using Descending. But we surely mentioned "DESC" keyword not like as ascending.
+
+select first_name, department_id,salary from employees order by department_id,salary asc;
+
+
+
+
+
+
+
+
+
+
+--------------------------------------DDL(DATA DEFINITION LANGUAGE)-------------------------------------
+/*
+select * from user_tables;
+
+create table Emp( id number(4,2), name varchar2(25), salary number(5), Dept_id char(25));
+
+select * from emp;
+
+alter table emp add start_date DATE;
+
+alter table emp modify dept_id varchar2(25);
+
+alter table emp rename column start_date to DOJ;
+
+alter table emp rename column salary to sal;
+
+alter table emp drop column doj;
+
+desc emp;
+
+----------------TABLE LEVEL---------------
+
+rename emp to emp_info;
+
+drop table emp;
+
+select * from user_tables;
+
+---------------------------------DML(DATA MANIPULATION LANGUAGE)--------------------------------------
+
+-----Insert (inserting a new data in a table)----------
+
+--METHOD 1-->
+
+insert into emp(ID,NAME) values(01, 'Arjun');
+
+*/
+
+
+CREATE TABLE OUT_OF_100 (
+SNO NUMBER(10),
+NAME VARCHAR2(20),
+POSITION NUMBER(5),
+MARKS NUMBER DEFAULT 75,
+CONSTRAINT MVP_SNO_PK PRIMARY KEY(SNO),
+CONSTRAINT MVP_NAME_UK UNIQUE(NAME)
+);
+
+select * from out_of_100;    
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'OUT_OF_100'; 
+
+ALTER TABLE OUT_OF_100 DISABLE CONSTRAINT MVP_SNO_PK;   
+
+ALTER TABLE OUT_OF_100 ENABLE NOVALIDATE CONSTRAINT MVP_SNO_PK;
+
+
+DROP TABLE OUT_OF_100;
+
+DELETE FROM OUT_OF_100 WHERE MARKS = '114';
+
+insert into out_of_100(sno,name,position) values (02,'yegalaivan',11); 
+
+INSERT INTO OUT_OF_100 VALUES (01,'NATHAN',18,114);                 
+
+insert into out_of_100 values(03,'MAARAN',15,123);
+
+insert into out_of_100(sno,name,position,marks) values(04,'KATRAN',14,86.3);
+
+insert into out_of_100(sno,name,position) values (06,'INDHRAN',16);
+
+CREATE TABLE OUTOF1K_BKUP_060225 AS SELECT * FROM OUT_OF_100 WHERE MARKS = 75;
+
+CREATE TABLE outof1k_dsbkup_060225 AS SELECT * FROM out_of_10 WHERE 1 <> 1;
+            
+SELECT * FROM OUTOF1K_DSBKUP_060225;              
+
+DROP TABLE OUTOF1K_BKUP_060225;
+
+DELETE FROM OUT_OF_100 WHERE POSITION BETWEEN 11 AND 18;
+
+
+delete from out_of_100 where sno>0;
+
+DROP TABLE OUT_OF_100;
+
+alter table mvp add s_no number(3,1);
+
+alter table mvp drop column s_no;
+
+
+
+
+
+----------------
+/*
+
+CREATE TABLE world_of_film (
+    s_no        NUMBER(5) NOT NULL,
+    film_name   VARCHAR2(20),
+    director    CHAR(30) NOT NULL,
+    genre       CHAR(20),
+    rating      NUMBER(10),
+    CONSTRAINT wof_sno_uk UNIQUE ( s_no ),
+    CONSTRAINT wof_fn_pk PRIMARY KEY ( film_name ),
+    CONSTRAINT wof_gr_ck CHECK ( genre IN (
+        'FEEL GOOD',
+        'HORROR',
+        'ROMCOM',
+        'SOCIAL ISSUES',
+        'ENTERTAINER',
+        'REALITY'
+    ) ),
+    CONSTRAINT wof_rng_fk FOREIGN KEY ( rating )
+        REFERENCES A1_SHOP(S_NO)
+);
+
+
+SELECT * FROM WORLD_OF_FILM;
+
+ALTER TABLE WORLD_OF_FILM DROP CONSTRAINT WOF_RNG_FK;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'WORLD_OF_FILM';
+
+TRUNCATE TABLE WORLD_OF_FILM;
+
+INSERT INTO WORLD_OF_FILM VALUES (1,'VEEDU','BALU MAHENDRA','REALITY',2);
+
+INSERT INTO WORLD_OF_FILM VALUES(2,'KATRADHU TAMIZH','RAM','SOCIAL ISSUES',4);
+
+INSERT INTO WORLD_OF_FILM VALUES(3,'VISARANAI','VETRIMARAN','REALITY',5);
+
+INSERT INTO WORLD_OF_FILM VALUES(4,'PERANBU','RAM','SOCIAL ISSUES',1);
+
+INSERT INTO WORLD_OF_FILM VALUES(5,'KALAKALAPU','SUNDAR C','ENTERTAINER',9);
+
+INSERT INTO WORLD_OF_FILM VALUES(6,'PANCHATHANTHIRAM','KAMALHASAN','ENTERTAINER',6);
+
+INSERT INTO WORLD_OF_FILM VALUES(7,'THIRUCHITRAMBALAM','MITHRAN R JAWAHAR','FEEL GOOD',10);
+
+INSERT INTO WORLD_OF_FILM VALUES(8,'NAYAGAN','MANIRATNAM','REALITY',3);
+
+INSERT INTO WORLD_OF_FILM VALUES(9,'KANCHANA','RAGHAVA LAWRENCE','HORROR',8);
+
+INSERT INTO WORLD_OF_FILM VALUES(10,'NAANUM ROWDY THAAN','VIGNESH SIVAN','ROMCOM',7);
+
+
+DROP TABLE WORLD_OF_FILM;
+
+COMMIT;
+
+*/
+----------------
+
+
+
+
+
+
+
+
+
+-----------
+/*
+--PARENT TABLE:
+
+CREATE TABLE i_school 
+(
+    s_no      NUMBER(5)NOT NULL,
+    name      VARCHAR2(20),
+    stu_id    NUMBER(5, 1),
+    dob       DATE NOT NULL,
+    e_mail    VARCHAR2(25),
+    MARKS   NUMBER(3, 1),
+    CONSTRAINT IS_NAME_UK UNIQUE(NAME),
+    CONSTRAINT IS_MAIL_UK UNIQUE(E_MAIL),
+    CONSTRAINT IS_MAR_PK PRIMARY KEY(MARKS)
+);
+
+SELECT * FROM I_SCHOOL;
+
+DROP TABLE I_SCHOOL;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'I_SCHOOL';          
+
+ALTER TABLE I_SCHOOL DROP CONSTRAINT IS_MARKS_PK;
+
+DELETE FROM I_SCHOOL WHERE s_no < 2 ;          
+
+
+
+
+
+--Method 1:
+INSERT INTO i_school (
+    s_no,
+    name,
+    stu_id,
+    dob,
+    e_mail,
+    marks
+) VALUES (
+    1,
+    'VENDHAN',
+    2501,
+    '11-SEP-11','Vendhan11:11@gmail.com',
+    95.5
+);
+--Method 2:
+INSERT INTO i_school (
+    e_mail,
+    dob,
+    name,
+    marks,
+    stu_id,
+    s_no
+) VALUES (
+    'Magila%20/14@gmail.com',
+    '25-AUG-10',
+    'MAGILAN',
+    96.2,
+    2502,02
+);
+--Method 3:
+INSERT INTO i_school (
+    s_no,
+    name,
+    stu_id,
+    dob,
+    marks
+) VALUES (
+    3,
+    'KOTRAN',
+    2503,
+    '12-NOV-10',
+    94.9
+);
+
+--Method 4:
+INSERT INTO i_school VALUES (
+    4,
+    'NANDRAN',
+    2504,
+    '12-DEC-10',
+    'Nandri_1212$@gmail.com',
+    97.1);
+    
+insert into I_school values(5,'INIYAVAN',2505,'11-MAY-10','Iniyan%525@gmail.com',89.9);
+
+insert into i_school values(6,'KANIYAN',2506,'18-MAR-11','Kani_1811$van@gmail.com',90.4);
+
+insert into i_school values(7,'KANAGAN',2507,'25-JUN-10','Kanag2510$3#@gmail.com',88.8);
+
+insert into i_school values(8,'MAARGAN',2508,'13-NOV-10','Margan/^78_13@gmail.com',93.1);
+
+insert into i_school values(9,'LOTCHAN',2509,'04-FEB-10','Lotcha04!10@gmail.com',91.7);
+
+insert into i_school values(10,'IYNTHAGAN',2510,'15-OCT-10','Iythaga1510^10@gmail.com',95);
+
+INSERT INTO I_SCHOOL VALUES(11,'MAARAN',2511,'12-APR-10','MA_RA%1204@gmail.com',94.8);
+
+UPDATE i_school
+SET
+    e_mail = 'Kotra12$10_11@gmail.com',
+    marks = 98.5
+WHERE
+    stu_id IN (
+        2503
+    );
+    
+select * from user_tables;                       
+
+SELECT * FROM I_SCHOOL;                                                                                            
+                   
+ALTER TABLE I_SCHOOL MODIFY name char(25); 
+
+DESC I_SCHOOL;
+ 
+--------------------------
+*/
+
+
+
+-------------------
+/*
+
+-- CHILD TABLE
+
+CREATE TABLE PROGRESS
+(
+SNO NUMBER(5),
+NAME CHAR(25) NOT NULL,
+ID_NO VARCHAR2(10),
+CUT_OFF NUMBER(4,2),
+CONSTRAINT PRO_SNO_PK PRIMARY KEY(SNO),
+CONSTRAINT PRO_IDNO_UK UNIQUE(ID_NO));
+--CONSTRAINT PRO_COFF_FK FOREIGN KEY (CUT_OFF) REFERENCES I_SCHOOL(MARKS)ON DELETE CASCADE
+
+
+SELECT * FROM PROGRESS;                   
+
+DROP TABLE PROGRESS;
+
+DELETE FROM PROGRESS WHERE NAME LIKE 'N_%';           
+
+INSERT INTO PROGRESS VALUES (01,'ASHOK','SSLC01',95.5);
+
+INSERT INTO PROGRESS VALUES(02,'GOKUL','SSLC02',93.1);
+
+INSERT INTO PROGRESS VALUES(03,'ILAN','SSLC03',95);
+
+INSERT INTO PROGRESS VALUES(04,'GOPI','SSLCO4',90.4);
+
+INSERT INTO PROGRESS VALUES(05,'RAJ','SSLC05',91.7);
+
+INSERT INTO PROGRESS VALUES(06,'NILA','SSLC06',97.1);
+
+INSERT INTO PROGRESS VALUES(07,'RADHA','SSLC07',98.5);
+
+INSERT INTO PROGRESS VALUES(08,'MADHU','SSLC08',96.2);
+
+INSERT INTO PROGRESS VALUES(09,'SINDHU','SSLC09',90.4);
+
+INSERT INTO PROGRESS VALUES(10,'NADHI','SSLC10',94.8);
+
+*/
+-------------------
+
+/*
+-------------------
+-------------08-FEB-25,SATURDAY, TEST-1, TOPIC - DQL, DRL-----------
+
+--1
+select * from employees;
+
+--2
+select 'THIS IS SQL TEST' FROM DUAL;
+
+--3*
+SELECT LOCATION_ID,POSTAL_CODE,CITY FROM LOCATIONS;
+
+--4
+SELECT 10+15 FROM DUAL;
+
+--5
+SELECT (1000/50)*100+10-10 FROM DUAL;
+
+--6*
+SELECT SALARY,COMMISSION_PCT FROM EMPLOYEES;
+
+--7
+SELECT DEPARTMENT_ID,JOB_ID,FIRST_NAME,LAST_NAME,SALARY FROM EMPLOYEES;
+
+--8
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME like 'Den%';
+
+--9
+select * from employees where manager_id = 100;
+
+--10
+select * from employees where commission_pct is not null;
+
+--11
+select * from employees where commission_pct is null;
+
+--12
+select * from employees where salary<5000 and department_id = 50;
+
+--13
+select * from employees where salary<5000 or department_id=30;
+
+--14
+select * from employees where employee_id in (101,108,114,118,123,129);
+
+--15 *
+select * from employees where first_name not like 'P%';
+
+--16*
+SELECT * FROM EMPLOYEES WHERE SALARY <= 10000  ORDER BY SALARY DESC;
+
+--17
+-- "DUAL" is used to a get an "INSTANT RESULT" or "INSTANT OUTPUT".
+
+--18
+SELECT SALARY,SALARY*30/100 FROM EMPLOYEES;
+
+--19*
+SELECT SALARY,SALARY*30/100 AS "NEW SALARY" FROM EMPLOYEES;
+
+--20
+SELECT * FROM EMPLOYEES WHERE SALARY<8000;
+
+--21
+SELECT * FROM EMPLOYEES WHERE SALARY>8000;
+
+--22
+SELECT * FROM EMPLOYEES WHERE SALARY<=8000;
+
+--23
+SELECT * FROM EMPLOYEES WHERE SALARY>=8000;
+
+--24
+SELECT * FROM EMPLOYEES WHERE SALARY = 8000;
+
+--25
+SELECT * FROM EMPLOYEES WHERE SALARY<>8000;
+
+*/
+--------------------
+
+
+-------------------------FUNCTIONS------------
+/*
+SINGLE ROW FUNCTION
+-------------FUNCTIONS------------
+--SINGLE ROW FUNCTIONS--
+
+select * from user_tables;
+
+select * from world_of_film;
+
+--CASE MANIPULATION UPPER,LOWER,INITCAP:
+
+SELECT UPPER(FILM_NAME),INITCAP(DIRECTOR),LOWER(GENRE) FROM WORLD_OF_FILM;
+
+SELECT LOWER('IM'),INITCAP('santhosh'),UPPER('VBS') FROM DUAL;
+
+SELECT * FROM WORLD_OF_FILM WHERE LOWER(FILM_NAME)= 'peranbu';
+
+--CHARACTER MANIPULATION:
+
+--LENGTH():
+
+SELECT FILM_NAME,LENGTH(FILM_NAME),RATING FROM WORLD_OF_FILM;
+
+SELECT LENGTH('     ')FROM DUAL;    
+
+select length(23453) from dual; -- o/p : 5
+
+--SUBSTR () [SUBSTRING]:
+
+--(COULMNNAME,X(START POSITION),Y(NO.OF.COUNTS)):
+SELECT S_NO,FILM_NAME,SUBSTR(FILM_NAME,3,4)FROM WORLD_OF_FILM;
+
+--GIVE A NEGATIVE VALUE IN (NO.OF.COUNTS): 
+SELECT S_NO,GENRE,SUBSTR(GENRE,2,-3)FROM WORLD_OF_FILM;
+
+--GIVE A NEGATIVE VALUE IN (START POSITION):
+SELECT S_NO,DIRECTOR,SUBSTR(DIRECTOR,-2,1) FROM WORLD_OF_FILM;
+
+--GIVE A ZERO IN START POSITION:
+SELECT S_NO,DIRECTOR,SUBSTR(DIRECTOR,0,5) FROM WORLD_OF_FILM;
+
+--GIVE ONLY POSITON VALUE AFTER SUBSTR COLUMN:
+SELECT S_NO,FILM_NAME,SUBSTR(FILM_NAME,4)FROM WORLD_OF_FILM;
+
+--INSTR() [INSTRING]:
+
+--(COL.NAME,SPECIFIC LETTER,START POSITON,LETTER'S COUNT POSITION)
+SELECT S_NO,DIRECTOR,INSTR(DIRECTOR,'A',3,2) FROM WORLD_OF_FILM;
+
+--GIVE ONLY LETTER AFTER COL.NAME:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A')FROM WORLD_OF_FILM;
+
+--GIVE LETTER & START POSITON:
+SELECT S_NO,DIRECTOR,INSTR(DIRECTOR,'A',2) FROM WORLD_OF_FILM;
+
+--GIVE 0 IN START POSITION:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A',0)FROM WORLD_OF_FILM;
+
+--GIVE 0 IN LETTER'S COUNT POSITION:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A',1,0)FROM WORLD_OF_FILM;
+
+--GIVE 0 FOR BOTH ARGUMENTS:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A',0,0)FROM WORLD_OF_FILM;
+
+--GIVE (-)VALUE IN START POSITON:
+SELECT S_NO,DIRECTOR,INSTR(DIRECTOR,'A',-5) FROM WORLD_OF_FILM;
+
+--GIVE LETTER'S COUNT POSITION,(-)VALUE IN START POSITION:
+SELECT S_NO,DIRECTOR,INSTR(DIRECTOR,'A',-3,2) FROM WORLD_OF_FILM;
+
+--GIVE (-)VALUE IN LETTER'S COUNT POSITION:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A',3,-1) FROM WORLD_OF_FILM;
+
+--GIVE (-)VALUES FOR BOTH ARGUMENS:
+SELECT S_NO,FILM_NAME,INSTR(FILM_NAME,'A',-3,-1) FROM WORLD_OF_FILM;
+
+--LTRIM ():
+SELECT LTRIM(000000000001234500000,0) FROM DUAL;
+
+--GIVE VALUE AS STRING:
+SELECT LTRIM('111110012300',1) FROM DUAL;
+
+--RTRIM ():
+SELECT RTRIM(000123000000,0) FROM DUAL;
+
+--GIVE VALUE AS STRING:
+SELECT RTRIM('00001230000000',0)FROM DUAL;
+
+--GIVE ONLY A VALUE IN LTRIM():
+SELECT LTRIM(00012345000) FROM DUAL;
+
+--GIVE ONLY A VALUE IN RTRIM():
+SELECT RTRIM(00012345000) FROM DUAL;
+
+--GIVE ONLY A STRING VALUE IN LTRIM():
+SELECT LTRIM('000123000')FROM DUAL;
+
+--GIVE ONLY A STRING VALUE IN RTRIM():
+SELECT RTRIM('000123000')FROM DUAL;
+
+--GET A O/P:123 FOR '000001234500000':
+select RTRIM(LTRIM('000001234500000',0),0) from dual;
+
+--LPAD () :
+SELECT LPAD (510,10,'*') FROM DUAL;
+
+--TABLE LEVEL(COL.NAME,NO.OF.DIGITS,PADING VALUE):
+SELECT S_NO,GENRE,LPAD(GENRE,25,'$')FROM WORLD_OF_FILM;
+
+--GIVE STRING IN PADING VALUE:
+SELECT LPAD ('510',6,'VBS') FROM DUAL;
+
+--GIVE (-) VALUE IN NO.OF.DIGITS:
+SELECT LPAD(510,-10,'#') FROM DUAL;
+
+--GIVE ONLY NO.OF.DIGITS VALUE:
+SELECT LPAD(510,10) FROM DUAL;
+
+--RPAD () :
+SELECT RPAD (510,10,'*') FROM DUAL;
+
+--TABLE LEVEL(COL.NAME,NO.OF.DIGITS,PADING VALUE):
+SELECT S_NO,GENRE,RPAD(GENRE,25,'$')FROM WORLD_OF_FILM;
+
+--GIVE STRING IN PADING VALUE:
+SELECT RPAD ('510',6,'VBS') FROM DUAL;
+
+--GIVE (-) VALUE IN NO.OF.DIGITS:
+SELECT RPAD(510,-10,'#') FROM DUAL;
+
+--GIVE ONLY NO.OF.DIGITS VALUE:
+SELECT RPAD(510,10) FROM DUAL;
+
+--REPLACE ():[STRING BASED REPLACEMENT]:
+
+--REPLACE (): 
+SELECT REPLACE('ANBE SIVAM','NBE','MMA') FROM DUAL;
+
+--GIVE ONLY CONT.WORDS AFTER VALUE:
+SELECT REPLACE('NAANTHAANDA ILAYARAJA','A') FROM DUAL;
+
+--TABLE LEVEL
+--(COL.NAME,CONTINUOUS WORDS,REPLACE OF CONTI.WORDS):
+SELECT S_NO,FILM_NAME,REPLACE(FILM_NAME,'AN','XY')FROM WORLD_OF_FILM;
+
+--TRANSLATE ():[CHARACTER BASED REPLACEMENT]
+
+--TRANSLATE ():
+SELECT TRANSLATE('YAAVARUM NALAM','UAM','OUE')FROM DUAL;
+
+--GIVE ONLY CONT.WORDS AFTER VALUE:
+SELECT TRANSLATE('NAAN ILAYARAJA','A') FROM DUAL;
+
+--TABLE LEVEL
+--(COL.NAME,CONTINUOUS WORDS,REPLACE OF CONTI.WORDS)
+SELECT S_NO,FILM_NAME,TRANSLATE(FILM_NAME,'EAN','XYZ')FROM WORLD_OF_FILM;
+
+--CONCAT ():
+SELECT CONCAT('VBS','510') FROM DUAL;
+
+--TABLE LEVEL(COL.NAME,COL.NAME):
+SELECT FILM_NAME,CONCAT(GENRE,RATING) FROM WORLD_OF_FILM;
+
+--TABLE LEVEL(COL.NAME,VALUE):
+SELECT S_NO,CONCAT(FILM_NAME,'--ITS NICE')FROM WORLD_OF_FILM;
+
+--GIVE THREE VALUES:
+SELECT CONCAT('VBS','510','1510') FROM DUAL;
+
+--REVERSE ():
+SELECT REVERSE('INNARITTU') FROM DUAL;
+
+--TABLE LEVEL() ONLY ONE ARGUMENT:
+SELECT S_NO,FILM_NAME,REVERSE(FILM_NAME) FROM WORLD_OF_FILM;
+
+
+--NUMBER FUNCTION:
+
+--ROUND ():
+
+--GIVE ONLY A VALUE DECIMAL<5:
+SELECT ROUND(98.35764) FROM DUAL;
+
+--GIVE ONLY A VALUE DECIMAL>5:
+SELECT ROUND(9.5423) FROM DUAL;
+
+--GIVE ONLY (-)VALUE DECIMAL<5:
+SELECT ROUND(-78.3793) FROM DUAL;
+
+--GIVE ONLY (-)VALUE DECIMAL>5:
+SELECT ROUND(-43.6219) FROM DUAL;
+
+--GIVE TWO VALUES:
+--ROUND(VALUE,NO.OF.DECIMAL POINTS):
+--GIVE ONE DECIMAL AFTER VALUE:
+SELECT ROUND(97.45387,1) FROM DUAL;
+
+--GIVE TWO DECIMAL AFTER VALUE:
+SELECT ROUND(98.13852,2) FROM DUAL;
+
+--GIVE (-1)IN DECIMAL POINT:
+SELECT ROUND(94.3594,-1) FROM DUAL;
+
+--GIVE (-2)IN DECIMAL POINT:
+SELECT ROUND(50.5342,-2) FROM DUAL;
+
+--GIVE BOTH OF (-) VALUES:
+SELECT ROUND(-89.343,-1) FROM DUAL;
+
+--TRUNC ():
+
+--TRUNC ():(VALUE,NO.OF.DCML.PT.)
+SELECT TRUNC(98.5293,1)FROM DUAL;
+
+--GIVE ONLY ONE ARG:
+SELECT TRUNC(93.5632) FROM DUAL;
+
+--GIVE ONLY ONE (-)ARG:
+SELECT TRUNC(-89.435) FROM DUAL;
+
+--GIVE '0' IN DCML PT.:
+SELECT TRUNC(90.231,0) FROM DUAL;
+
+--GIVE TWO DCML.PT.:
+SELECT TRUNC(89.2134,2) FROM DUAL;
+
+--GIVE ZERO'S BEFORE VALUE:
+SELECT TRUNC(0012.23,2)FROM DUAL;
+
+--GIVE WHOLE NUM AS VALUE:
+SELECT TRUNC(1000,3)FROM DUAL;
+
+--MOD():
+--MOD(BASE,DIVIDE VALUE):
+SELECT MOD(27,5)FROM DUAL;
+
+--GIVE (-)BASE:
+SELECT MOD(-57,6) FROM DUAL;
+
+--GIVE (-)DIVIDER VALUE:
+SELECT MOD(68,-3) FROM DUAL;
+
+--GIVE BOTH (-) VALUES:
+SELECT MOD(-26,-5) FROM DUAL;
+
+--TABLE LEVEL(COL.NAME,DIVIDER VALUE):
+SELECT S_NO,FILM_NAME,MOD(S_NO,2) FROM WORLD_OF_FILM;
+
+--GET AN ODD DATA IN TABLE:
+SELECT * FROM WORLD_OF_FILM WHERE MOD(S_NO,2)=1;
+
+--GET AN EVEN DATA IN TABLES:
+SELECT * FROM WORLD_OF_FILM WHERE MOD(S_NO,2)=0;
+
+
+--POWER():(BASE,POWER):
+SELECT POWER(5,2)FROM DUAL;
+
+--GIVE DCML VALUE IN BASE:
+SELECT POWER(0.25,2) FROM DUAL;
+
+--GIVE (-)VALUE IN POWER:
+SELECT POWER (4,-2) FROM DUAL;
+
+--GIVE DCML IN BASE & (-)VALUE IN POWER:
+SELECT POWER(0.25,-2)FROM DUAL;
+
+--TABLE LEVEL:(COL.NAME,POWER VALUE)
+SELECT S_NO,RATING,POWER(RATING,2)FROM WORLD_OF_FILM;
+
+--GIVE(-)VALUE IN POWER VALUE:
+SELECT S_NO,RATING,POWER(RATING,-2)FROM WORLD_OF_FILM;
+
+--SQRT():
+SELECT SQRT(81)FROM DUAL;
+
+--GIVE DCML VALUE:
+SELECT SQRT(0.245)FROM DUAL;
+
+--GIVE (-)VALUE:
+SELECT SQRT(-73) FROM DUAL;
+
+--TABLE LEVEL:SQRT(COL.NAME)
+SELECT S_NO,SQRT(S_NO)FROM WORLD_OF_FILM;
+
+--FLOOR():
+SELECT FLOOR(34.9830)FROM DUAL;
+
+--GIVE (-)VALUE:
+SELECT FLOOR(-45.231)FROM DUAL;
+
+--CEIL():
+SELECT CEIL(64.9382)FROM DUAL;
+
+--GIVE (-)VALUE:
+SELECT CEIL(-53.5238)FROM DUAL;
+
+--ABS ():
+SELECT ABS(-55)FROM DUAL;
+
+--TO VIEW PSEDUO COLUMNS:
+SELECT ROWNUM,ROWID,SYSDATE,SYSTIMESTAMP,VBS.* FROM PROGRESS VBS;
+
+--DATE FUNCTIONS:
+
+--sysdate (+ and -):
+select sysdate+3 from dual;
+
+select sysdate-5 from dual;
+
+--SYSTIMESTAMP:
+SELECT SYSTIMESTAMP FROM DUAL;
+
+--ADD_MONTHS():(Date-format,Number):
+SELECT ADD_MONTHS(SYSDATE,7)FROM DUAL;
+
+--GIVE (-)value in number:
+SELECT ADD_MONTHS('11-MAR-24',-2)FROM DUAL;
+
+--TABLE LEVEL:(col.name,number):
+SELECT EMPLOYEE_ID,START_DATE,ADD_MONTHS(START_DATE,3)AS "PROBATION" FROM JOB_HISTORY;
+
+--MONTHS_BETWEEN()(DATE 1 LATER THAN DATE 2):
+SELECT MONTHS_BETWEEN(SYSDATE,'11-SEP-24')FROM DUAL;
+
+--CHECK WITH(PAST,PRESENT/FUTURE):
+SELECT MONTHS_BETWEEN('11-NOV-25',SYSDATE)FROM DUAL;
+
+--TABLE LEVEL:(COL.NAME,COL.NAME):
+SELECT EMPLOYEE_ID,START_DATE,END_DATE,MONTHS_BETWEEN(END_DATE,START_DATE) AS "EXP" FROM JOB_HISTORY;
+
+--CALCULATE YEARS BETWEEN TWO DATES:
+SELECT
+    round(months_between(SYSDATE, '21-JAN-01') /12)
+    || ' VAYSAAGIDUCHU' AS "UN VAYASU ENNA"
+FROM
+    dual;
+
+--NEXT_DAY():(DATE,SUN-SAT)
+SELECT NEXT_DAY(SYSDATE,'THURSDAY')FROM DUAL;
+
+--TABLE LEVEL:
+SELECT EMPLOYEE_ID,START_DATE,NEXT_DAY(START_DATE,'FRIDAY')FROM JOB_HISTORY;
+
+--LAST_DAY():(ONLY ONE ARG)
+SELECT LAST_DAY(SYSDATE)FROM DUAL;
+
+--TABLE LEVEL:
+SELECT START_DATE,LAST_DAY(START_DATE)FROM JOB_HISTORY;
+
+--TO FIND FIRST_DAY OF SYSDATE:
+SELECT (ADD_MONTHS(LAST_DAY(SYSDATE),-1))+1 FROM DUAL;
+
+--------TYPE CONVERSION:
+
+--TO_NUMBER():[IMPLICIT]
+SELECT 10 + '10' FROM DUAL;
+
+--TO_NUMBER(): [EXPLICIT]
+SELECT 10 + TO_NUMBER('10')FROM DUAL;
+
+--TO_DATE():
+SELECT TO_DATE('13/FEB/2023','DD/MM/YYYY')FROM DUAL;
+
+--TO_CHAR():(EXISTING DATE, EXPECT DATE VALUE CHAR)
+SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY')FROM DUAL;
+
+--GIVE RANDOM CHAR DATE VALUE-1:
+SELECT TO_CHAR(SYSDATE,'MONTH-YEAR-DD') FROM DUAL;
+
+--GIVE RANDOM CHAR DATE VALUE-2:
+SELECT TO_CHAR (SYSDATE,'DD-MON-YYYY-MONTH-YEAR') FROM DUAL;
+
+--3.GIVE RANDOM CHAR DATE VALUE- DATE ONLY:
+SELECT TO_CHAR(SYSDATE,'DD') FROM DUAL;
+
+--4.GIVE RANDOM CHAR DATE VALUE- MONTH ONLY:
+SELECT  To_CHAR(SYSDATE,'MM')FROM DUAL;   
+     
+--5. GIVE RANDOM CHAR DATE VALUE-(MON)MONTH ONLY:
+SELECT To_CHAR(SYSDATE,'MON')FROM DUAL;    
+
+--6. GIVE RANDOM CHAR DATE VALUE-(MONTH)MONTH ONLY:
+SELECT To_CHAR(SYSDATE,'Month')FROM DUAL;     
+
+--7.GIVE RANDOM CHAR DATE VALUE-(YY)YEAR ONLY:
+SELECT To_CHAR(SYSDATE,'YY')FROM DUAL;  
+
+--8.GIVE RANDOM CHAR DATE VALUE-(YYYY)YEAR ONLY:
+SELECT TO_CHAR(SYSDATE,'YYYY') FROM DUAL;
+
+--9.GIVE RANDOM CHAR DATE VALUE-(YEAR)YEAR ONLY:
+SELECT TO_CHAR(SYSDATE,'YEAR')FROM DUAL;
+
+--10.GIVE RANDOM CHAR DATE VALUE
+       --(HH;MI:SS)hour:min:sec ONLY:
+SELECT TO_CHAR(SYSDATE,'HH:MI:SS')FROM DUAL;
+
+--11.GIVE RANDOM CHAR DATE VALUE
+       --(HH24;MI:SS)hour(24):min:sec(GMT)ONLY:
+SELECT TO_CHAR(SYSDATE,'HH24:MI:SS')FROM DUAL;
+       
+--12.GIVE RANDOM CHAR DATE VALUE-(D)DAY IN NUMBER ONLY:
+--(1-SUNDAY,2-MONDAY,3-TUESDAY,4-WEDNESDAY,5-THURSDAY,6-FRIDAY,7-SATURDAY)
+SELECT TO_CHAR(SYSDATE,'D')FROM DUAL;
+      
+--13.GIVE RANDOM CHAR DATE VALUE-(DAY)DAY ONLY:
+SELECT TO_CHAR(SYSDATE,'DAY')FROM DUAL;
+        
+--14.GIVE RANDOM CHAR DATE VALUE-(DDTH)LIKE"Nth & 1st":
+SELECT TO_CHAR(SYSDATE,'DDTH')FROM DUAL;
+
+--15.GIVE RANDOM CHAR DATE VALUE-(DDSPTH)Date in Word":
+SELECT TO_CHAR(SYSDATE,'DDSPTH')FROM DUAL;
+
+--COMBINATION TO_CHAR():
+SELECT  
+       SYSDATE, 
+       To_CHAR(SYSDATE,'DD')         "DD"           ,
+       To_CHAR(SYSDATE,'MM')         "MM"           ,
+       To_CHAR(SYSDATE,'MON')        "MON"          ,
+       To_CHAR(SYSDATE,'Month')      "MONTH"        ,
+       To_CHAR(SYSDATE,'YY')         "YY"           ,
+       To_CHAR(SYSDATE,'YYYY')       "YYYY"         ,
+       To_CHAR(SYSDATE,'YEAR')       "YEAR"             , 
+       To_CHAR(SYSDATE,'HH:MI:SS')   "hour min sec"     ,   
+       To_CHAR(SYSDATE,'HH24:MI:SS') "hour(24) min sec" ,
+       To_CHAR(SYSDATE,'D')          "Day in no"        ,   
+       To_CHAR(SYSDATE,'Day')        "Day"              ,   
+       To_CHAR(SYSDATE,'DDTH')       "With th and st"   ,
+       To_CHAR(SYSDATE,'DDSPTH')   "Date in Word"
+FROM 
+       Dual;
+     
+
+
+----GENERAL FUNCTIONS:
+
+NVL ():
+CREATE TABLE MAD(S_NO NUMBER(5),NAME CHAR(15));
+
+INSERT INTO MAD VALUES(01,'MANI');
+
+INSERT INTO MAD VALUES(02,'LINGA');
+
+INSERT INTO MAD VALUES(03,NULL);
+
+INSERT INTO MAD VALUES(04,'TOM');
+
+INSERT INTO MAD VALUES(05,'REX');
+
+DESC MAD;
+
+SELECT * FROM MAD;
+
+--GIVE A CHAR VALUE IN NULL COL. USING NVL:
+SELECT NVL(NAME,'MARK')FROM MAD;
+
+--GIVE A NUMBER VALUE IN NULL COL.USING NVL:
+--NULL COL. IN CHAR DATA TYPE:
+SELECT NVL(NAME,100)FROM MAD;
+
+--NVL2():
+SELECT NAME,NVL2(NAME,'IDK','000')FROM MAD;
+
+--NULLIF():
+SELECT NULLIF(510, 510) FROM DUAL;
+
+--GIVE MISMATCHING ARGS:
+SELECT NULLIF(510,1510) FROM DUAL;
+
+--TABLE LEVEL:
+SELECT NULLIF(NAME,NAME)FROM MAD;
+
+--GIVE MISMATCHING ARGS IN TABLE LVL:
+SELECT NULLIF(UPPER(NAME),LOWER(NAME))FROM MAD;
+
+--COALSEC():
+SELECT COALESCE (NULL, NULL, NULL,510, NULL, NULL,46) FROM Dual;
+
+
+
+*/
+--------------------------
+
+
+
+
+
+
+
+
+
+----------------
+/*
+
+--DECODE: (FUNCTION)
+
+SELECT * FROM EMPLOYEES;
+
+SELECT * FROM EMP;
+
+CREATE TABLE EMP(ID NUMBER(5),NAME CHAR(10),D_ID CHAR(15));
+
+INSERT INTO EMP VALUES(100,'RAJ',10);
+
+INSERT INTO EMP VALUES(101,'RAM',20);
+
+INSERT INTO EMP VALUES(102,'NADHI',30);
+
+INSERT INTO EMP VALUES(103,'NILA',40);
+
+INSERT INTO EMP VALUES(104,'MADHI',50);
+
+INSERT INTO EMP VALUES(105,'NAKUL',60);
+
+
+--DECODE:
+SELECT ID,NAME,DECODE (D_ID,10,'IT',20,'HR',30,'SALES',40,'CSE',50,'AR','UNKONWN')AS "ROLE" FROM EMP;
+
+
+
+
+
+--CASE:
+SELECT * FROM PROGRESS;
+
+SELECT SNO,NAME,ID_NO,CUT_OFF,
+CASE
+WHEN CUT_OFF BETWEEN 98 AND 100 THEN 'FAB'
+WHEN CUT_OFF IN (95,95.5,96.2,97.1) THEN 'SUPER'
+WHEN CUT_OFF BETWEEN 90 AND 94.9  THEN 'GOOD'
+END
+AS REPORT
+FROM PROGRESS;
+
+--MULTI ROW FUNCTION:
+
+
+select * from progress;
+
+--MIN():
+SELECT MIN(CUT_OFF) FROM PROGRESS;
+
+--MAX():
+SELECT MAX(CUT_OFF) FROM PROGRESS;
+
+--AVG():
+SELECT AVG(CUT_OFF) FROM PROGRESS;
+
+--SUM():
+SELECT SUM(CUT_OFF) FROM PROGRESS;
+
+--COUNT():
+SELECT COUNT(CUT_OFF) FROM PROGRESS;
+
+--COUNT(): IF NULL COUNT'S OR NOT:
+SELECT COUNT(NAME) FROM MAD;
+
+SELECT * FROM MAD;
+
+--TASK QUES:
+
+CREATE TABLE EMP_TASK
+(SNO NUMBER(3),NAME CHAR(5));
+
+INSERT INTO EMP_TASK VALUES(1,'A');
+INSERT INTO EMP_TASK VALUES(2,'B');
+INSERT INTO EMP_TASK VALUES(NULL,NULL);
+INSERT INTO EMP_TASK VALUES(3,'C');
+INSERT INTO EMP_TASK VALUES(4,'D');
+INSERT INTO EMP_TASK VALUES(NULL,'E');
+
+SELECT * FROM EMP_TASK;
+
+--1.COUNT(1):
+SELECT COUNT(1) FROM EMP_TASK;
+
+--2.COUNT(*):
+SELECT COUNT(*) FROM EMP_TASK;
+
+--3.COUNT(SNO)/COUNT(SNO):
+SELECT COUNT(SNO)/COUNT(SNO) FROM EMP_TASK;
+
+--4.AVG(SNO):
+SELECT AVG(SNO)FROM EMP_TASK;
+
+--5.SUM(SNO)/COUNT(*):
+SELECT SUM(SNO)/COUNT(*)FROM EMP_TASK;
+
+--DISTINCT():
+SELECT DEPARTMENT_ID FROM JOB_HISTORY;
+
+--DISTINCT(): [UNIQUE VALUE COUNTS]
+SELECT DISTINCT DEPARTMENT_ID FROM JOB_HISTORY;
+
+--GROUP BY, HAVING:
+SELECT
+    department_id,
+    SALARY,
+    COUNT(*)
+FROM
+    employees
+WHERE SALARY > 4500
+AND FIRST_NAME NOT IN ('Steve')
+GROUP BY
+    department_id,SALARY
+HAVING COUNT(*)>=2
+ORDER BY DEPARTMENT_ID;
+    
+SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID =100;
+
+---------------------
+*/
+COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------JOINS-------------------
+-------JOINS-------
+/* 
+
+--JOINS:
+
+SELECT * FROM USER_TABLES;
+
+CREATE TABLE EMP_1 (ID NUMBER );
+
+INSERT INTO EMP_1 VALUES (50);
+
+SELECT * FROM EMP_1;
+
+CREATE TABLE DEPT_1(ID NUMBER);
+
+INSERT INTO DEPT_1 VALUES(10);
+
+SELECT * FROM DEPT_1;
+
+
+--1.EQUI JOIN--
+
+--SIGN METHOD:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e,
+    dept_1   d
+WHERE
+    e.id = d.id;
+    
+--ON CLAUSE:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e JOIN
+    dept_1   d
+ON
+    e.id = d.id;
+    
+
+--2(A).LEFT OUTER JOIN:
+
+--SIGN METHOD:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e,
+    dept_1   d
+WHERE
+    e.id = d.id(+);
+    
+--ONCLAUSE:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e LEFT OUTER JOIN
+    dept_1   d
+ON
+    e.id = d.id;
+    
+--2(B).RIGHT OUTER JOIN:
+
+--SIGN METHOD:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e,
+    dept_1   d
+WHERE
+    e.id(+) = d.id;
+    
+--ON CLAUSE:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e RIGHT OUTER JOIN
+    dept_1   d
+ON
+    e.id = d.id;
+    
+--2(C).FULL OUTER JOIN:
+
+--ON CLAUSE:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e FULL OUTER JOIN
+    dept_1   d
+ON
+    e.id = d.id;
+    
+--CROSS JOIN:
+
+--SIGN METHOD:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e,
+    dept_1   d;
+    
+--ON CLAUSE:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_1    e CROSS JOIN
+    dept_1   d;
+
+--NATURAL JOIN:
+
+CREATE TABLE EMP_N 
+(ID NUMBER,
+CONSTRAINT N_ID_PK PRIMARY KEY(ID)
+);
+
+INSERT INTO EMP_N VALUES(90);
+
+SELECT * FROM EMP_N;
+
+DROP TABLE DEPT_N;
+
+CREATE TABLE DEPT_N
+( ID NUMBER,
+CONSTRAINT N_ID_FK FOREIGN KEY(ID) REFERENCES EMP_N(ID)
+);
+
+INSERT INTO DEPT_N VALUES(90);
+
+
+SELECT * FROM DEPT_N;
+
+--NATURAL JOIN:
+SELECT
+    e.id,
+    d.id
+FROM
+    emp_N   e,
+    dept_N   d;
+
+
+--INNER JOIN:
+
+SELECT * FROM OFFICE;
+
+--SIGN METHOD:
+SELECT O2.ID,O2.NAME,O1.ID, O1.NAME "REPORTED TO" FROM OFFICE O1, OFFICE O2 WHERE O2.R_ID = O1.ID;
+
+--ONCLAUSE :
+SELECT O2.ID,O2.NAME,O1.ID, O1.NAME "REPORTED TO" FROM OFFICE O1 INNER JOIN OFFICE O2 ON O2.R_ID = O1.ID;
+
+
+
+
+--JOINS USING THREE TABLES;
+
+SELECT * FROM PROGRESS;
+
+SELECT * FROM I_SCHOOL;
+
+SELECT * FROM OUT_OF_100;
+
+
+--EQUI JOIN:(SIGN METHOD)
+SELECT
+    p.name,
+    P.CUT_OFF,
+    I.S_NO,
+    I.NAME,
+    i.stu_id,
+    I.MARKS,
+    O.SNO,
+    O.NAME,
+    o.position
+FROM
+    progress     p,
+    i_school     i,
+    out_of_100   o
+WHERE
+    p.cut_off = i.marks
+    AND o.SNO = i.s_no;
+    
+--EQUI JOIN:(ON CLAUSE METHOD)
+SELECT
+    p.name,
+    P.CUT_OFF,
+    I.S_NO,
+    I.NAME,
+    i.stu_id,
+    I.MARKS,
+    O.SNO,
+    O.NAME,
+    o.position
+FROM
+    progress     p JOIN
+    i_school     i ON P.CUT_OFF = I.MARKS JOIN
+    out_of_100   o ON o.SNO = i.s_no;
+    
+--LEFT OUTER JOIN:(SIGN METHOD)
+SELECT
+    p.name,
+    p.cut_off,
+    i.s_no,
+    i.name,
+    i.stu_id,
+    i.marks,
+    o.sno,
+    o.name,
+    o.position
+FROM
+    progress     p,
+    i_school     i,
+    out_of_100   o
+WHERE
+    p.cut_off = i.marks (+)
+    AND i.s_no = o.sno (+);
+    
+--LEFT OUTER JOIN:(ON CLAUSE)
+SELECT
+    p.name,
+    p.cut_off,
+    i.s_no,
+    i.name,
+    i.stu_id,
+    i.marks,
+    o.sno,
+    o.name,
+    o.position
+FROM
+    progress     p
+    LEFT OUTER JOIN i_school     i ON p.cut_off = i.marks
+    LEFT OUTER JOIN out_of_100   o ON i.s_no = o.sno ;
+    
+--RIGHT OUTER JOIN:(SIGN METHOD)
+SELECT
+    p.name,
+    p.cut_off,
+    i.s_no,
+    i.name,
+    i.stu_id,
+    i.marks,
+    o.sno,
+    o.name,
+    o.position
+FROM
+    progress     p,
+    i_school     i,
+    out_of_100   o
+WHERE
+    p.cut_off(+) = i.marks
+    AND i.s_no(+) = o.sno;
+    
+--RIGHT OUTER JOIN:(ON CLAUSE)
+SELECT
+    p.name,
+    p.cut_off,
+    i.s_no,
+    i.name,
+    i.stu_id,
+    i.marks,
+    o.sno,
+    o.name,
+    o.position
+FROM
+    progress     p
+    RIGHT OUTER JOIN i_school     i ON p.cut_off = i.marks
+    RIGHT OUTER JOIN out_of_100   o ON i.s_no = o.sno ;
+    
+--FULL OUTER JOIN:(ON CLAUSE)
+SELECT
+    p.name,
+    P.CUT_OFF,
+    I.S_NO,
+    I.NAME,
+    i.stu_id,
+    I.MARKS,
+    O.SNO,
+    O.NAME,
+    o.position
+FROM
+    progress     p FULL OUTER JOIN
+    i_school     i ON P.CUT_OFF = I.MARKS FULL OUTER JOIN
+    out_of_100   o ON o.SNO = i.s_no;
+    
+    
+--TASK FOR USING NULL:
+
+SELECT * FROM USER_TABLES;
+
+CREATE TABLE A ( A NUMBER(3));
+
+INSERT INTO A VALUES(1);
+
+TRUNCATE TABLE A;
+
+SELECT * FROM A;
+
+CREATE TABLE B (B NUMBER(3));
+
+INSERT INTO B VALUES(1);
+
+TRUNCATE TABLE B;
+
+SELECT * FROM B;
+
+--EQUI JOIN:
+--(SIGN)
+SELECT A , B FROM A,B WHERE A = B;
+--(ONCLAUSE)
+SELECT A, B FROM A JOIN B ON A = B;
+
+--LEFT OUTER JOIN:
+--(SIGN)
+SELECT A,B FROM A,B WHERE A = B(+);
+--(ONCLAUSE)
+SELECT A,B FROM A LEFT OUTER JOIN B ON A=B;
+
+--RIGHT OUTER JOIN:
+--(SIGN)
+SELECT A,B FROM A,B WHERE A(+) = B;
+--(ONCLAUSE)
+SELECT A,B FROM A RIGHT OUTER JOIN B ON A=B;
+
+--FULL OUTER JOIN (ONCLAUSE):
+SELECT A,B FROM A FULL OUTER JOIN B ON A=B;
+
+--CROSS JOIN
+--(SIGN)
+SELECT A,B FROM A,B ;
+--(ONCLAUSE)
+SELECT A,B FROM A CROSS JOIN B;
+
+
+-------------------
